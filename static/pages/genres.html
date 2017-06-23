@@ -1,0 +1,16 @@
+<div class="col-md-6 col-md-offset-3 col-xs-12 " style="margin-top:2em;">
+<h3 style="text-align: center;">Genres</h3>
+<div class="pull-right">
+  <a href="/home">Home > </a>
+</div>
+<ul  style="border: 1px solid black; padding: 0;">
+  <li ng-repeat="genre in genres" style="padding: 0.5em; margin: 0 0 0 0;">
+    <a href="genre/{{genre.id}}/">{{genre.name}}</a>
+  </li>
+</ul>
+<div class="pull-center" style="text-align:center;">
+  <a class="btn btn-primary" style="margin: 1em 0 1em 0;" href="/addgenre">Add Genre</a><br />
+  <button ng-click="gotoprev()" ng-show="showprev" style="margin: 0.5em;">Prev</a>
+  <button ng-click="gotonext()" ng-show="shownext" style="margin: 0.5em;">Next</a>
+</div>
+</div>

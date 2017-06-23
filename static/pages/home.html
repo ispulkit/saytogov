@@ -1,0 +1,25 @@
+<div class="col-md-6 col-md-offset-3 col-xs-12 " style="margin-top:2em;">
+<h3 style="text-align: center;">Music Tracks</h3>
+<form>
+<div class="input-group" style="width: 100%;">
+  <span class="input-group-addon">
+    <i class="glyphicon glyphicon-search"></i>
+  </span>
+  <input type="text" ng-model="name" placeholder="Search" class="form-control" style="display:inline; width: 80%;" />
+  <button class="btn btn-info" style="display:inline" ng-click="searchTrack()">Search</button>
+</div>
+</form>
+<a href="/genres" style="display:block;">List all Genres > </a><br />
+<ul  style="border: 1px solid black; padding: 0;">
+  <li ng-repeat="track in tracks" style="padding: 0.5em 1.5em 0.5em 1.5em;">
+    <a href="track/{{track.id}}/">{{track.title}} [<span ng-repeat="genre in track.genres"> {{genre.name}}|</span>]
+      <uib-rating ng-model="track.rating" max="max" read-only="isReadonly" aria-labelledby="default-rating" class="pull-right"></uib-rating>
+    </a>
+  </li>
+</ul>
+<div class="pull-center" style="text-align:center;">
+  <a class="btn btn-primary" style="margin: 1em 0 1em 0;" href="/addtrack">Add Track</a><br />
+  <button ng-click="gotoprev()" ng-show="showprev" style="margin: 0.5em;">Prev</a>
+  <button ng-click="gotonext()" ng-show="shownext" style="margin: 0.5em;">Next</a>
+</div>
+</div>
