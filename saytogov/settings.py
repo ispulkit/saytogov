@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'frontweb',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -113,6 +114,22 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        #'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+         'rest_framework.authentication.SessionAuthentication',
+         #'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES':(
+        'rest_framework.permissions.AllowAny',
+    )
+}
 
 
 # Static files (CSS, JavaScript, Images)
