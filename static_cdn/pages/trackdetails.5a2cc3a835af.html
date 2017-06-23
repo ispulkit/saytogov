@@ -1,0 +1,29 @@
+<div class="col-md-6 col-md-offset-3 col-xs-12 " style="margin-top:2em;">
+<form>
+<input type="text" ng-model="posterTitle" style="text-align: center; width: 100%; display:inline-block; padding: 0.25em; margin: 1em 0 1em 0;" width="100%;"/>
+Genres:
+<ul  style="border: 1px solid black;">
+  <li ng-repeat="genre in track.genres" style="padding: 0.5em;">{{genre.name}}</li>
+</ul>
+<div class="col-xs-6">
+  Rating:
+</div>
+<div class="col-xs-6">
+  <input type="number" ng-model="posterRating" min="1" max="9" step="1" />
+</div>
+<div class="col-xs-4" style="margin: 1em 0 0 0;">
+  Add Genre: (Enter Genre Id)
+</div>
+<div class="col-xs-4">
+  <input ng-model="addedGenre" type="number" style="text-align: center; width: 100%; display:inline-block; padding: 0.25em 0 0.25em 0; margin: 1em 0 1em 0;" />
+</div>
+<div class="col-xs-4">
+  <button ng-click="addGenre()" class="btn btn-primary" style="margin: 1em 0 1em 0;" href="/" label="update">Add</a>
+</div>
+<div class="pull-center" style="text-align:center;">
+  <button ng-click="updateData()" class="btn btn-primary" style="margin: 1em 0 1em 0;" href="/" label="update">Update</button><br />
+  <a href="/" style="text-align: center;">Home</a>
+
+</div>
+</form>
+</div>
