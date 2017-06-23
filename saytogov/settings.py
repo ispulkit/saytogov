@@ -25,7 +25,7 @@ SECRET_KEY = '2scow0dc73p)u$o6!+#=n*-va60at0-w9ec*^uu4xhxrexygl8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ispulkitkr.pythonanywhere.com', 'localhost', 'www.ispulkitkr.pythonanywhere.com', 'pythonanywhere.com']
+ALLOWED_HOSTS = ['ispulkitkr.pythonanywhere.com', 'localhost', 'www.ispulkitkr.pythonanywhere.com', 'pythonanywhere.com', 'immense-tundra-42531.herokuapp.com']
 
 
 # Application definition
