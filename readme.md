@@ -1,4 +1,4 @@
-#MUSIC BROWSING WEB APP
+# MUSIC BROWSING WEB APP
 # "HOW TO"
 * BASE URL - / - (Using Remote server http://104.197.128.152:8000 for bigger dataset)
 	* List all tracks
