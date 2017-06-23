@@ -2,7 +2,7 @@ var myApp = angular.module('mymodule', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
                     .config(function($routeProvider, $locationProvider){
 
                       $routeProvider
-                      .when("/home", {
+                      .when("/home/:title?", {
                         templateUrl: "/static/pages/home.html",
                         controller: "homeController"
                       }).when("/track/:id", {
@@ -206,8 +206,16 @@ var myApp = angular.module('mymodule', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
                         })
                       }
                     })
-                    .controller('homeController', function($scope, $http, $log, $location){
-                          $http.get("http://104.197.128.152:8000/v1/tracks")
+                    .controller('homeController', function($scope, $http, $log, $location, $routeParams){
+                          var finalparams = '';
+                          if($routeParams.title!=null){
+                            finalparams = $routeParams.title;
+                          }
+                          $http({
+                            method: "get",
+                            url: "http://104.197.128.152:8000/v1/tracks",
+                            params: {title: finalparams}
+                          })
                           .then(function(response){
                               $scope.tracks = response.data.results;
                               $scope.max = 9;
@@ -216,12 +224,12 @@ var myApp = angular.module('mymodule', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
                               $scope.shownext = false;
                               $scope.nexturl = "";
                               $scope.prevurl = "";
-                              $scope.name="";
+                              $scope.title="";
                               $scope.searchTrack = function(){
-                                if($scope.name)
-                                  $location.url("/trackSearch/" + $scope.name);
+                                if($scope.title!=null)
+                                  $location.url("/home/").search({title:$scope.title});
                                 else
-                                  $location.url("/trackSearch/" + $scope.name);
+                                  $location.url("/home/").search({title:''});
                               }
                               if(response.data.previous!=null && response.data.previous!=''){
                                 $scope.showprev = true;
@@ -239,7 +247,7 @@ var myApp = angular.module('mymodule', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
                                   $scope.shownext = false;
                                   $scope.nexturl = "";
                                   $scope.prevurl = "";
-                                  $scope.name="";
+                                  $scope.title="";
                                   if(response.data.previous!=null && response.data.previous!=''){
                                     $scope.showprev = true;
                                     $scope.prevurl = response.data.previous;
