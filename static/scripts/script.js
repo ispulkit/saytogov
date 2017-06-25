@@ -1,4 +1,4 @@
-var myApp = angular.module('mymodule', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
+var myApp = angular.module('mymodule', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'checklist-model'])
                     .config(function($routeProvider, $locationProvider){
 
                       $routeProvider
@@ -36,30 +36,44 @@ var myApp = angular.module('mymodule', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
                           $scope.posterId = response.data.id;
                           $scope.posterRating = parseInt(response.data.rating);
                           $scope.addedGenre = 1;
-                          posterGenres = []
+                          var posterGenres = []
                           for(var i=0; i<response.data.genres.length; i++){
-                            posterGenres.push(response.data.genres[i].id);
+                            posterGenres.push(response.data.genres[i]);
                           }
-                          $scope.addGenre = function(){
-                            if($scope.addedGenre!=null)
-                              posterGenres.push($scope.addedGenre);
+                          $http({
+                              url: 'http://104.197.128.152:8000/v1/genres',
+                              method: 'get'
+                          }).then(function(response){
+                            $scope.allgenres = response.data.results;
+                            $scope.nextgenre = response.data.next;
+                            $scope.selected = {
+                              genres: posterGenres
+                            };
+                          $scope.loadMoreGenres = function(){
                             $http({
-                              method: 'POST',
-                              url: "http://104.197.128.152:8000/v1/tracks/" + $routeParams.id,
-                              data: {
-                                'id': $scope.posterID,
-                                'title': $scope.posterTitle,
-                                'rating': $scope.posterRating,
-                                'genres': posterGenres
-                              }
+                              url: $scope.nextgenre,
+                              method: 'get'
                             }).then(function(response){
                               $log.info(response);
-                              $route.reload();
+                              for(var k=0; k<response.data.results.length; k++){
+                                $scope.allgenres.push(response.data.results[k]);
+                              }
+                              $scope.nextgenre = response.data.next;
+
                             }, function(error){
                               $log.info(error);
                             })
                           }
+                            $log.info(response);
+                          }, function(error){
+                            $log.debug(error);
+                          })
+
                           $scope.updateData = function(){
+                            var parsedGenres = [];
+                            for(var x=0; x<$scope.selected.genres.length; x++){
+                              parsedGenres.push($scope.selected.genres[x].id);
+                            }
                             $http({
                               method: 'POST',
                               url: "http://104.197.128.152:8000/v1/tracks/" + $routeParams.id,
@@ -67,9 +81,7 @@ var myApp = angular.module('mymodule', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
                                 'id': $scope.posterID,
                                 'title': $scope.posterTitle,
                                 'rating': $scope.posterRating,
-                                'genres': [
-                                  1
-                                ]
+                                'genres': parsedGenres
                               }
                             }).then(function(response){
                               $log.info(response);

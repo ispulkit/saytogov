@@ -21,7 +21,7 @@ from frontweb.views import homeview
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('frontweb.api.urls', namespace='api')),
-    url(r'^$', homeview),
+    url(r'^', homeview),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

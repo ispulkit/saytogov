@@ -5,20 +5,16 @@ Genres:
 <ul  style="border: 1px solid black;">
   <li ng-repeat="genre in track.genres" style="padding: 0.5em;">{{genre.name}}</li>
 </ul>
-<div class="col-xs-6">
-  Rating:
+<div class="col-xs-6">Rating:
 </div>
 <div class="col-xs-6">
   <input type="number" ng-model="posterRating" min="1" max="9" step="1" />
 </div>
-<div class="col-xs-4" style="margin: 1em 0 0 0;">
-  Add Genre: (Enter Genre Id)
-</div>
-<div class="col-xs-4">
-  <input ng-model="addedGenre" type="number" style="text-align: center; width: 100%; display:inline-block; padding: 0.25em 0 0.25em 0; margin: 1em 0 1em 0;" />
-</div>
-<div class="col-xs-4">
-  <button ng-click="addGenre()" class="btn btn-primary" style="margin: 1em 0 1em 0;" href="/" label="update">Add</a>
+&nbsp;&nbsp;&nbsp;&nbsp;Genres:<br />
+<label ng-repeat="genre in allgenres"><input type="checkbox" checklist-model="selected.genres" checklist-value="genre" style="margin: 1em 1.5em 1em 1.5em; " /> {{genre.name}}<br/> </label>
+<br />
+<div class="pull-center" style="text-align:center;">
+<button class="btn btn-info" style="font-size: 12px; padding: 0.25em 0.5em 0.25em 0.5em;" ng-click="loadMoreGenres()">Load more</button>
 </div>
 <div class="pull-center" style="text-align:center;">
   <button ng-click="updateData()" class="btn btn-primary" style="margin: 1em 0 1em 0;" href="/" label="update">Update</button><br />
